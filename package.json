@@ -5,10 +5,10 @@
 	"main": "./baleen",
 	"author": "Liam Doherty",
 	"dependencies" : { 
-		"keratin": ">=0.2",
-		"parsicle": "*",
-		"structures": "*",
-		"underscorem": ">0.1"
+		"keratin": "git://github.com/lfdoherty/keratin.git",
+		"parsicle": "git://github.com/lfdoherty/parsicle.git",
+		"structures": "git://github.com/lfdoherty/structures.git",
+		"underscorem": "git://github.com/lfdoherty/underscorem.git"
 	},
 	"engines": {
 		 "node" : "0.6"
