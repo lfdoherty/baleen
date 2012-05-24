@@ -1,0 +1,16 @@
+{
+	"name": "baleen",
+	"version": "0.1.1",
+	"description": "Uses parsicle to create binary parsers and serializers for keratin data.",
+	"main": "./baleen",
+	"author": "Liam Doherty",
+	"dependencies" : { 
+		"keratin": ">=0.2",
+		"parsicle": "*",
+		"structures": "*",
+		"underscorem": ">0.1"
+	},
+	"engines": {
+		 "node" : "0.6"
+	}
+}
