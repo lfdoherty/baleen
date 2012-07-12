@@ -22,13 +22,16 @@ function applyPrimitive(t, v){
 	}else if(t === 'long'){
 		v.long();
 	}else if(t === 'binary'){
-	//	console.log('applied binary')
 		v.binary();
+	}else if(t === 'real'){
+		v.real();
 	}else if(t === 'primitive'){
+		
 		var e = v.either();
 			e.long();
 			e.string();
 			e.boolean();
+			e.real()
 	}else{
 		_.errout('TODO: ' + JSON.stringify(t));
 	}
@@ -58,7 +61,7 @@ function applyInclude(schema, name, v, useCodes, inline, isView){
 			if(sch[name] === undefined) _.errout('cannot find name (' + name + ') in wrapped schema: ' + JSON.stringify(sch));
 			var typeCode = sch[name].code;
 			_.assertInt(typeCode);
-			v.wrapped(count, ''+typeCode);
+			v.wrapped(count, typeCode);
 		}else{
 			v.wrapped(count);
 		}
@@ -97,9 +100,9 @@ function makeFromSchema(schema, wrapped, useCodes, includeMeta){
 	
 	var ps = parsicle.make(wrappedPs, function(parser){
 		_.each(schema._byCode, function(objSchema){
-			
+					
 			var isView = objSchema.isView;
-			//console.log('isView ' + objSchema.name + ' ' + isView);
+		//	console.log('isView ' + objSchema.name + ' ' + isView);
 			
 			var id = useCodes ? objSchema.code : objSchema.name;
 			
@@ -120,7 +123,10 @@ function makeFromSchema(schema, wrapped, useCodes, includeMeta){
 					meta.key('editId').int();
 				}
 				
-				_.each(objSchema.properties, function(p){
+				//_.each(objSchema.properties, function(p){
+				Object.keys(objSchema.properties).forEach(function(pk){
+					var p = objSchema.properties[pk]
+					
 					var v;
 					if(useCodes){
 						if(p.tags.required){
@@ -169,6 +175,9 @@ function makeFromSchema(schema, wrapped, useCodes, includeMeta){
 							applyPrimitive(p.type.members.primitive, loop);
 						}else if(p.type.members.type === 'object'){
 							applyInclude(schema, p.type.members.object, loop, useCodes,p.tags.inline, isView);
+						}else if(p.type.members.type === 'view'){
+							console.log(JSON.stringify(p))
+							applyInclude(schema, p.type.members.view, loop, useCodes,p.tags.inline, isView);
 						}else{
 							_.errout('TODO: ' + JSON.stringify(p));
 						}
