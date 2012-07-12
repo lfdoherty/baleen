@@ -1,6 +1,6 @@
 {
 	"name": "baleen",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Uses parsicle to create binary parsers and serializers for keratin data.",
 	"main": "./baleen",
 	"author": "Liam Doherty",
@@ -11,6 +11,6 @@
 		"underscorem": "git://github.com/lfdoherty/underscorem.git"
 	},
 	"engines": {
-		 "node" : "0.6"
+		 "node" : ">=0.6"
 	}
 }
